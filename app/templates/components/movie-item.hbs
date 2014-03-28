@@ -1,0 +1,28 @@
+<div class="accordion-group">
+    <div class="accordion-heading">
+        <a {{bind-attr data-imdbtitle="imdbId"}} class="accordion-toggle" data-toggle="collapse" {{bind-attr data-parent="list"}} {{bind-attr href="#collapse-list-id"}}>
+            {{title}} <small>({{year}})</small>
+            <span class="starttime">{{startTime}}</span>
+        </a>
+
+        <img  src="images/zenders/{{cleanChannelName}}.png" {{bind-attr alt="channelName"}} {{bind-attr title="channelName"}} class="zender logo" />
+        <span class="zender name">{{channelName}}</span>
+
+    </div>
+    <div {{bind-attr id=":collapse-list-id"}} class="accordion-body collapse in">
+        <div class="accordion-inner movie-details" {{bind-attr data-imdb="imdbId"}}>
+            <span class="endtime">tot {{endTime}}</span>
+                <p class="rt-rating"></p>
+                <p>
+                    <a href="http://www.imdb.com/title/tt{{imdbId}}/"><strong>IMDb</strong></a> {{imdbRating}} door {{imdbVotes}} stemmers
+                </p>
+
+            <p>
+                <a href="{{ftLink}}"><strong>FilmTotaal</strong></a> {{ftRating}} door {{ftVotes}} stemmers
+            </p>
+            <p class="movie-synopsis">
+                {{synopsis}}
+            </p>
+        </div>
+    </div>
+</div>

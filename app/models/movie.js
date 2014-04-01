@@ -6,8 +6,8 @@ var Movie = DS.Model.extend({
     cleanChannelName: DS.attr('string'),
     channelName: DS.attr('string'),
 
-    startTime: DS.attr('number'),
-    endTime: DS.attr('number'),
+    startTime: DS.attr('string'),
+    endTime: DS.attr('string'),
 
     imdbRating: DS.attr('number'),
     imdbVotes: DS.attr('number'),

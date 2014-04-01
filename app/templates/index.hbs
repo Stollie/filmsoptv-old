@@ -1,20 +1,20 @@
 <div id="movies-container" class="row">
     <div class="col-lg-6">
-      <h2>Vandaag <small id="date-today"></small></h2>
+      <h2>Vandaag <small id="date-today">{{date.today}}</small></h2>
 
       <div id="movies-today">
-          {{id}}
           <div class="movie-list accordion" id="today">
-            {{#each movie in movies}}
-                {{movie-item}}
-            {{/each}}
+              {{render "today" moviesToday}}
           </div>
       </div>
     </div>
     <div class="col-lg-6">
-      <h2>Morgen <small id="date-tomorrow"></small></h2>
+      <h2>Morgen <small id="date-tomorrow">{{date.tomorrow}}</small></h2>
       <div id="movies-tomorrow">
-
+          <div class="movie-list accordion" id="today">
+              {{moviesTomorrow}}
+              {{render "tomorrow" moviesTomorrow}}
+          </div>
       </div>
     </div>
 </div>

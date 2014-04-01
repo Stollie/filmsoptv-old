@@ -1,0 +1,31 @@
+Vandaag lijst
+{{#each controller}}
+    <div class="accordion-group">
+        <div class="accordion-heading">
+            <a {{bind-attr data-imdbtitle="movie.imdbId"}} class="accordion-toggle" data-toggle="collapse" {{bind-attr data-parent="list"}} {{bind-attr href="#collapse-list-id"}}>
+                {{movie.title}} <small>({{movie.year}})</small>
+                <span class="starttime">{{movie.startTime}}</span>
+            </a>
+
+            <img {{bind-attr src="movie.cleanChannelName"}} {{bind-attr alt="movie.channelName"}} {{bind-attr title="movie.channelName"}} class="zender logo" />
+            <span class="zender name">{{movie.channelName}}</span>
+
+        </div>
+        <div {{bind-attr id=":collapse-list-id"}} class="accordion-body collapse in">
+            <div class="accordion-inner movie-details" {{bind-attr data-imdb="movie.imdbId"}}>
+                <span class="endtime">tot {{movie.endTime}}</span>
+                    <p class="rt-rating"></p>
+                    <p>
+                        <a href="http://www.imdb.com/title/tt{{movie.imdbId}}/"><strong>IMDb</strong></a> {{movie.imdbRating}} door {{movie.imdbVotes}} stemmers
+                    </p>
+
+                <p>
+                    <a href="{{ftLink}}"><strong>FilmTotaal</strong></a> {{movie.ftRating}} door {{movie.ftVotes}} stemmers
+                </p>
+                <p class="movie-synopsis">
+                    {{movie.synopsis}}
+                </p>
+            </div>
+        </div>
+    </div>
+{{/each}}

@@ -1,27 +1,28 @@
 <div class="accordion-group">
     <div class="accordion-heading">
-        <a {{bind-attr data-imdbtitle="imdbId"}} class="accordion-toggle" data-toggle="collapse" {{bind-attr data-parent="list"}} {{bind-attr href="#collapse-list-id"}}>
-            {{title}} <small>({{year}})</small>
-            <span class="starttime">{{startTime}}</span>
+        <a {{bind-attr data-imdbtitle="movie.imdb_id"}} class="accordion-toggle" data-toggle="collapse" {{bind-attr data-parent="list"}} {{bind-attr href="#collapse-list-id"}}>
+            {{{movie.titel}}} <small>({{movie.jaar}})</small>
+            <span class="starttime">{{format-date movie.starttijd "HH:mm"}}</span>
         </a>
 
-        <img  src="images/zenders/{{cleanChannelName}}.png" {{bind-attr alt="channelName"}} {{bind-attr title="channelName"}} class="zender logo" />
-        <span class="zender name">{{channelName}}</span>
+        <img {{bind-attr src="movie.zenderLogo"}} {{bind-attr alt="movie.zender"}} {{bind-attr title="movie.zender"}} class="zender logo" />
+        <span class="zender name">{{movie.zender}}</span>
 
     </div>
     <div {{bind-attr id=":collapse-list-id"}} class="accordion-body collapse in">
-        <div class="accordion-inner movie-details" {{bind-attr data-imdb="imdbId"}}>
-            <span class="endtime">tot {{endTime}}</span>
+        <div class="accordion-inner movie-details" {{bind-attr data-imdb="movie.imdb_id"}}>
+            <span class="endtime">tot {{format-date movie.eindtijd "HH:mm"}}</span>
                 <p class="rt-rating"></p>
                 <p>
-                    <a href="http://www.imdb.com/title/tt{{imdbId}}/"><strong>IMDb</strong></a> {{imdbRating}} door {{imdbVotes}} stemmers
+                    <a {{bind-attr href="movie.imdbLink"}}><strong>IMDb</strong></a> {{movie.imdb_rating}} door {{movie.imdb_votes}} stemmers
                 </p>
-
+            {{#if movie.ft_votes }}
             <p>
-                <a href="{{ftLink}}"><strong>FilmTotaal</strong></a> {{ftRating}} door {{ftVotes}} stemmers
+                <a {{bind-attr href="movie.ft_link"}}><strong>FilmTotaal</strong></a> {{movie.ft_rating}} door {{movie.ft_votes}} stemmers
             </p>
+            {{/if}}
             <p class="movie-synopsis">
-                {{synopsis}}
+                {{{movie.synopsis}}}
             </p>
         </div>
     </div>

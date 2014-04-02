@@ -53,7 +53,6 @@ class FilmTotaal
             $data = $this->_makeCall($this->_dateToday, 'today');
             $ids = array();
             foreach ($data['film'] as $row) {
-                $row['id'] = $row['imdb_id'];
                 $ids[] = $row['imdb_id'];
             }
             
@@ -78,57 +77,6 @@ class FilmTotaal
 	public function getTomorrow()
 	{
 		return $this->_makeCall($this->_dateTomorrow, 'tomorrow');
-	}
-	
-	private function readXML($xml)
-	{
-            $fileContents = str_replace(array("\n", "\r", "\t"), '', $xml);
-            $fileContents = trim(str_replace('"', "'", $fileContents));
-            $simpleXml = simplexml_load_string($fileContents);
-            $json = json_encode($simpleXml);
-            
-		$result = '';
-		$doc = new DOMDocument;
-		// We don't want to bother with white spaces
-		$doc->preserveWhiteSpace = false;	
-		$doc->loadXML ($xml);
-		
-		$xpath = new DOMXPath($doc);
-		
-		$query = '//filmsoptv/film';
-		$movies = $xpath->query($query);
-		if (false == is_null($movies)) {
-                    $films = array("list" => array( 
-                                "name" => "today", 
-                                "date" => $this->_dateToday,
-                                "movies" => array()
-                                ),
-                             "movies" => array()
-                            );
-			foreach ($movies as $movie) {
-				$m = new Movie($movie);
-                                
-                                //$films["movies"][] = [
-                                //    
-                                //]
-                $title_class = $m->getEndTimestamp() <= time() ? 'ended' : '';
-                            
-                
-                
-				$result .= "\t".'<h3 class="'.$title_class.'">';
-                $result .= '<a href="#" data-imdbtitle="'.$m->getImbdId().'">'.$m->getTitle().' <small>('.$m->getYear().')</small> <span class="starttime">'. $m->getStartTime() .'</span></a>'.$m->getChannelImg().'</h3>'."\n";
-				$result .= "\t".'<div class="movie-details" data-imdb="'.$m->getImbdId().'">'."\n";
-				$result .= "\t\t".'<span class="endtime">tot '. $m->getEndTime() .'</span>';
-				$result .= '<p class="rt-rating"></p>';
-				$result .= '<p>' . $m->getImbdRating() . '</p><p>' . $m->getFTRating() . '</p>'."\n";
-				$result .= "\t\t".'<p class="movie-synopsis">'.$m->getSynopsis().'</p>'."\n";
-				$result .= "\t".'</div>'."\n\n";
-			}
-		}
-		else {
-			$result = 'empty';
-		}
-		return $result;
 	}
 	
 	/**

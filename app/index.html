@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <!-- @if dist=true -->
+    <base href="http://www.remcoraaijmakers.nl/filmsoptv3/">
+    <!-- @endif -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Films op TV, beoordeeld</title>
@@ -14,19 +17,18 @@
     <meta property="og:locale" content="nl_NL" />
     <meta property="og:img" content="" />
 
-    <link rel="dns-prefetch" href="//ajax.aspnetcdn.com" />
     <link rel="dns-prefetch" href="//api.rottentomatoes.com" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- build:css(tmp/result) /assets/app.min.css -->
+    <!-- build:css(tmp/result) assets/app.min.css -->
     <link rel="stylesheet" href="/vendor/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="/assets/style.css">
     <!-- endbuild -->
 
     <!-- for more details visit: https://github.com/yeoman/grunt-usemin -->
 
-    <!-- build:js(tmp/result) /assets/config.min.js -->
+    <!-- build:js(tmp/result) assets/config.min.js -->
 
         <script src="/config/environment.js"></script>
         <!-- @if tests=false -->
@@ -43,8 +45,7 @@
 
     <!-- endbuild -->
 
-    <!-- build:js(tmp/result) /assets/vendor.min.js -->
-
+    <!-- build:js(tmp/result) assets/vendor.min.js -->
         <script src="/vendor/jquery/jquery.js"></script>
 
         <!-- @if dist=false -->
@@ -59,11 +60,10 @@
         <script src="/vendor/loader.js/loader.js"></script>
         <script src="/vendor/ember-resolver/dist/ember-resolver.js"></script>
         <script src="/vendor/ic-ajax/main.js"></script>
-
+        <script src="/vendor/moment/moment.js"></script>
     <!-- endbuild -->
 
-    <!-- build:js(tmp/result) /assets/app.min.js -->
-        <script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.1.0/moment.min.js"></script>
+    <!-- build:js(tmp/result) assets/app.min.js -->
         <script src="/assets/app.js"></script>
         <script src="/assets/templates.js"></script>
 
@@ -125,6 +125,19 @@
       window.App = require('appkit/app')["default"].create();
     </script>
     <!-- @endif -->
-
+    <!-- @if dist=true -->
+    <!-- Piwik -->
+    <script type="text/javascript">
+    var pkBaseURL = (("https:" == document.location.protocol) ? "https://www.remcoraaijmakers.nl/statistics/" : "http://www.remcoraaijmakers.nl/statistics/");
+    document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
+    </script><script type="text/javascript">
+    try {
+    var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", 1);
+    piwikTracker.trackPageView();
+    piwikTracker.enableLinkTracking();
+    } catch( err ) {}
+    </script><noscript><p><img src="http://www.remcoraaijmakers.nl/statistics/piwik.php?idsite=1" style="border:0" alt="" /></p></noscript>
+    <!-- End Piwik Tracking Code -->
+    <!-- @endif -->
 </body>
 </html>

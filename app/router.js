@@ -1,5 +1,7 @@
 var Router = Ember.Router.extend(); // ensure we don't share routes between all Router instances
-
+Router.reopen({
+  rootURL: Ember.ENV.rootURL
+});
 //Router.map(function() {
 //  this.route('component-test');
 //  this.route('helper-test');

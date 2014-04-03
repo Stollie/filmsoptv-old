@@ -1,5 +1,6 @@
 var ApplicationAdapter = DS.RESTAdapter.extend({
-    namespace: 'api'
+    host: Ember.ENV.host,
+    namespace: Ember.ENV.namespace
 });
 
 export default ApplicationAdapter;

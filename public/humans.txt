@@ -3,13 +3,11 @@
 
 # TEAM
 
-    <name> -- <role> -- <twitter>
+    Remco Raaijmakers -- Developer -- @stolliewood
 
-# THANKS
-
-    <name>
-
+y
 # TECHNOLOGY COLOPHON
 
     HTML5, CSS3
     Ember.js
+    Ember App Kit

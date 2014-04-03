@@ -9,6 +9,7 @@ var TomatoAdapter = DS.Adapter.extend({
         return new Ember.RSVP.Promise(function(resolve, reject) {
             // Set a delay to slowdown api calls to rottentomatoes
             Ember.run.later(function() {
+//                ic.ajax(url);
                 jQuery.ajax({
                     url: url,
                     dataType: "jsonp"

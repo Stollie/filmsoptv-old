@@ -6,7 +6,10 @@ var Tomato = DS.Model.extend({
         if ( score >= 60 ) {
             return 'popcorn';
         }
-        else if ( score > 0 && score < 60  ) {
+        else if (
+            score > 0 &&
+            score < 60
+        ) {
             return 'spilled';
         }
     }.property('ratings.audience_score'),
@@ -15,7 +18,10 @@ var Tomato = DS.Model.extend({
         if ( score >= 60 ) {
             return 'fresh';
         }
-        else if ( score > 0 && score < 60  ) {
+        else if (
+            score > 0 &&
+            score < 60
+        ) {
             return 'rotten';
         }
     }.property('ratings.critics_score')

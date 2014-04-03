@@ -3,8 +3,10 @@
         <a {{bind-attr data-imdbtitle="movie.imdb_id"}} class="accordion-toggle" 
             data-toggle="collapse" {{bind-attr data-parent="list"}} 
             {{bind-attr href="#collapse-list-id"}}>
-            {{#if movie.tomato}}
+            {{#if movie.tomato.ratings.critics_score }}
                 <i {{bind-attr class=":icon :tiny movie.tomato.audienceIcon"}}></i>
+            {{/if}}
+            {{#if movie.tomato.ratings.audience_score }}
                 <i {{bind-attr class=":icon :tiny movie.tomato.criticsIcon"}}></i>
             {{/if}}
             {{{movie.titel}}} <small>({{movie.jaar}})</small>
@@ -22,7 +24,7 @@
             {{#if movie.tomato }}
             <p>
                 <a {{bind-attr href="movie.tomato.links.alternate"}}><strong>Rotten Tomatoes</strong></a>
-                {{#if movie.tomato.ratings.critics_rating }}
+                {{#if movie.tomato.ratings.critics_score }}
                 <br />
                 <span class="rt-critics-rating"><em>Critici</em>
                     {{movie.tomato.ratings.critics_score}}% 

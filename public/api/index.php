@@ -4,14 +4,17 @@
 header('Cache-Control: no-cache, must-revalidate');
 header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
 header('Content-type: application/json');
-	include_once("class.filmtotaal.php");
-	include_once("class.movie.php");
-	$filmTotaal = new FilmTotaal('avhedzfx5j464lfysar4e4yxoguhdaga');
-        echo $filmTotaal->getToday();
-	//echo $filmTotaal->getTomorrow();
+include_once("class.filmtotaal.php");
+include_once("class.movie.php");
+$filmTotaal = new FilmTotaal('avhedzfx5j464lfysar4e4yxoguhdaga');
 
-
-//print XmlToJson::Parse("http://www.filmtotaal.nl/api/filmsoptv.xml?apikey=avhedzfx5j464lfysar4e4yxoguhdaga&dag=02-04-2014&sorteer=0");
-
-?>	
+if ($_GET['list'] == 'today') {
+    echo $filmTotaal->getList('today');
+}
+else if ($_GET['list'] == 'tomorrow') {
+    echo $filmTotaal->getList('tomorrow');
+}
+else {
+    echo json_encode(array('error' => 'url fout'));
+}
  

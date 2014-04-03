@@ -4,6 +4,6 @@ RewriteEngine On
 RewriteCond %{SCRIPT_FILENAME} !-d
 RewriteCond %{SCRIPT_FILENAME} !-f
  
-RewriteRule ^lists/1$ ./index.php
-RewriteRule ^lists/*$ ./index.php
+RewriteRule ^lists/1$ ./index.php?list=today
+RewriteRule ^lists/2$ ./index.php?list=tomorrow
  

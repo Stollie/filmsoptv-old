@@ -1,6 +1,12 @@
 <div class="accordion-group">
     <div class="accordion-heading">
-        <a {{bind-attr data-imdbtitle="movie.imdb_id"}} class="accordion-toggle" data-toggle="collapse" {{bind-attr data-parent="list"}} {{bind-attr href="#collapse-list-id"}}>
+        <a {{bind-attr data-imdbtitle="movie.imdb_id"}} class="accordion-toggle" 
+            data-toggle="collapse" {{bind-attr data-parent="list"}} 
+            {{bind-attr href="#collapse-list-id"}}>
+            {{#if movie.tomato}}
+                <i {{bind-attr class=":icon :tiny movie.tomato.audienceIcon"}}></i>
+                <i {{bind-attr class=":icon :tiny movie.tomato.criticsIcon"}}></i>
+            {{/if}}
             {{{movie.titel}}} <small>({{movie.jaar}})</small>
             <span class="starttime">{{format-date movie.starttijd "HH:mm"}}</span>
         </a>
@@ -12,13 +18,36 @@
     <div {{bind-attr id=":collapse-list-id"}} class="accordion-body collapse in">
         <div class="accordion-inner movie-details" {{bind-attr data-imdb="movie.imdb_id"}}>
             <span class="endtime">tot {{format-date movie.eindtijd "HH:mm"}}</span>
-                <p class="rt-rating"></p>
-                <p>
-                    <a {{bind-attr href="movie.imdbLink"}}><strong>IMDb</strong></a> {{movie.imdb_rating}} door {{movie.imdb_votes}} stemmers
-                </p>
+            
+            {{#if movie.tomato }}
+            <p>
+                <a {{bind-attr href="movie.tomato.links.alternate"}}><strong>Rotten Tomatoes</strong></a>
+                {{#if movie.tomato.ratings.critics_rating }}
+                <br />
+                <span class="rt-critics-rating"><em>Critici</em>
+                    {{movie.tomato.ratings.critics_score}}% 
+                    {{movie.tomato.ratings.critics_rating}}
+                </span>
+                {{/if}}
+                
+                {{#if movie.tomato.ratings.audience_score }}
+                <br />
+                <span class="audience_rating"><em>Publiek</em>
+                    {{movie.tomato.ratings.audience_score}}% 
+                    {{movie.tomato.ratings.audience_rating}}
+                </span>
+                {{/if}}
+            </p>
+            {{/if}}
+            
+            <p>
+                <a {{bind-attr href="movie.imdbLink"}}><strong>IMDb</strong></a>
+                {{movie.imdb_rating}} door {{movie.imdb_votes}} stemmers
+            </p>
             {{#if movie.ft_votes }}
             <p>
-                <a {{bind-attr href="movie.ft_link"}}><strong>FilmTotaal</strong></a> {{movie.ft_rating}} door {{movie.ft_votes}} stemmers
+                <a {{bind-attr href="movie.ft_link"}}><strong>FilmTotaal</strong></a>
+                {{movie.ft_rating}} door {{movie.ft_votes}} stemmers
             </p>
             {{/if}}
             <p class="movie-synopsis">

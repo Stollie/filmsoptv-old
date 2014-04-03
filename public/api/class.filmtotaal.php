@@ -52,8 +52,9 @@ class FilmTotaal
 	{	
             $data = $this->_makeCall($this->_dateToday, 'today');
             $ids = array();
-            foreach ($data['film'] as $row) {
+            foreach ($data['film'] as &$row) {
                 $ids[] = $row['imdb_id'];
+                $row['tomato'] = $row['imdb_id'];
             }
             
             $result = array(

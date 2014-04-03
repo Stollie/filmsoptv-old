@@ -6,10 +6,10 @@ var Movie = DS.Model.extend({
        return 'http://www.imdb.com/title/tt' + this.get('imdb_id');
      }.property('imdb_id'),
      
+    zender: DS.attr('string'),
     zenderLogo: function() {
        return 'assets/images/zenders/' + this.get('zender') + '.png';
      }.property('zender'),
-    zender: DS.attr('string'),
 
     starttijd: DS.attr('string'),
     eindtijd: DS.attr('string'),
@@ -22,7 +22,9 @@ var Movie = DS.Model.extend({
     filmtip: DS.attr('number'),
     ft_link: DS.attr('string'),
 
-    synopsis: DS.attr('string')
+    synopsis: DS.attr('string'),
+    
+    tomato: DS.belongsTo('tomato', {async: true})
 });
 
 export default Movie;

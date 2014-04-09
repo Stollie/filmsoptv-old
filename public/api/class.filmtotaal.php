@@ -12,138 +12,156 @@
  * @license MIT
  *
  */
-class FilmTotaal {
-    const FILMTOTAAL = 'FilmTotaal - H&eacute;t online Filmoverzicht';
-    const VERSION = '0.1';
 
-    /**
-     * The API-key
-     *
-     * @var string
-     */
-    private $_apikey;
-    private $_timecache;
-    private $today; 
-    private $tomorrow; 
+class FilmTotaal
+{
+	const FILMTOTAAL = 'FilmTotaal - H&eacute;t online Filmoverzicht';
 
-    /**
-     * Default constructor
-     *
-     * @param string $apikey					API-key from FilmTotaal
-     * @return void
-     */
-    public function __construct($apikey) {
-        $this->_timecache = 3600 * 2;
-        $this->today = date("d-m-Y");
-        $this->tomorrow = date("d-m-Y", mktime(0,0,0,date("m"),date("d")+1,date("Y")));
-        $this->setApikey($apikey);
-    }
+	const VERSION = '0.1';
 
-    /**
-     * Get XML data from tomorrow
-     *
-     * @return string
-     */
-    public function getList($name) {	
-        $data = $this->_makeCall($this->$name, $name);
-        $ids = array();
-        foreach ($data['film'] as &$row) {
-            $ids[] = $row['imdb_id'];
-            $row['tomato'] = $row['imdb_id'];
-        }
+	/**
+	 * The API-key
+	 *
+	 * @var string
+	 */
+	private $_apikey;
+	private $_timecache;
+	private $today; 
+	private $tomorrow; 
+	
+	/**
+	 * Default constructor
+	 *
+	 * @param string $apikey					API-key from FilmTotaal
+	 * @return void
+	 */
+	public function __construct($apikey)
+	{
+		$this->_timecache = 3600 * 2;
+		$this->today = date("d-m-Y");
+		$this->tomorrow = date("d-m-Y", mktime(0,0,0,date("m"),date("d")+1,date("Y")));
+		$this->setApikey($apikey);
+	}
 
-        $result = array(
-            'list' =>  array(
-                'id' => $name == 'today' ? 1 : 2,
-                'name' => $name,
-                'date' => $data['@attributes']['datum'],
-                'movies' => $ids
-            ),
-            'movies' => $data['film']
-        );
-
-        return json_encode($result);
-    }
-
-    /**
-     * Makes the call to the API
-     *
-     * @param string $date					The date in format 30-04-2012
-     * @return xml
-     */
-    private function _makeCall($date, $when)
-    {
-        $url = 'http://www.filmtotaal.nl/api/filmsoptv.xml?apikey='.$this->getApikey().'&dag='.$date.'&sorteer=0';
-        $results = '';
-        $file = 'cache/'.$when.'.xml';
-        if (
-            file_exists($file) &&
-            (time() - $this->_timecache < filemtime($file))
-        ) {
-            $handle = fopen($file, 'r');
-            $results = fread($handle,filesize($file));
-
-            fclose($handle);
-        }
-        elseif (extension_loaded('curl')) {
-            $ch = curl_init();
-            curl_setopt($ch, CURLOPT_URL, $url);
-            curl_setopt($ch, CURLOPT_HEADER, 0);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-            curl_setopt($ch, CURLOPT_FAILONERROR, 1);
-
-            $results = curl_exec($ch);
-            $headers = curl_getinfo($ch);
-
-            $error_number = curl_errno($ch);
-            $error_message = curl_error($ch);
-            // netjes sluiten
-            curl_close($ch);
-            if (false === $error_number ) {
-                if ( file_exists($file) ) {
-                    unlink($file);
-                }
-                $handle = fopen($file, 'w');
-                fwrite($handle, $results);
-                fclose($handle);
+	/**
+	 * Get XML data from tomorrow
+	 *
+	 * @return string
+	 */
+	public function getList($name)
+	{	
+            $data = $this->_makeCall($this->$name, $name);
+            $ids = array();
+            foreach ($data['film'] as &$row) {
+                $ids[] = $row['imdb_id'];
+                $row['tomato'] = $row['imdb_id'];
             }
-        }
-        else {
-            $results = file_get_contents($url);
-        }
+            
+            $result = array(
+                'list' =>  array(
+                    'id' => $name == 'today' ? 1 : 2,
+                    'name' => $name,
+                    'date' => $data['@attributes']['datum'],
+                    'movies' => $ids
+                ),
+                'movies' => $data['film']
+            );
+            
+            return json_encode($result);
+	}
+	
+	/**
+	 * Makes the call to the API
+	 *
+	 * @param string $date					The date in format 30-04-2012
+	 * @return xml
+	 */
+	private function _makeCall($date, $when)
+	{
+            $url = 'http://www.filmtotaal.nl/api/filmsoptv.xml?apikey='.$this->getApikey().'&dag='.$date.'&sorteer=0';
+            $results = '';
+            $file = 'cache/'.$when.'.xml';
+            if (
+                $handle = file_exists($file) &&
+                (time() - $this->_timecache < filemtime($file))
+            ) {
+                    $handle = fopen($file, 'r');
+                    $results = fread($handle,filesize($file));
 
-        return $this->parse($results);
-    }
+                    fclose($handle);
+            }
+            elseif (extension_loaded('curl')) {
+                    $ch = curl_init();
+                    curl_setopt($ch, CURLOPT_URL, $url);
+                    curl_setopt($ch, CURLOPT_HEADER, 0);
+                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+                    curl_setopt($ch, CURLOPT_FAILONERROR, 1);
 
-    public function parse ($data) {
-        $fileContents = $data;
-        $fileContents = str_replace(array("\n", "\r", "\t"), '', $fileContents);
-        $fileContents = trim(str_replace('"', "'", $fileContents));
+                    $results = curl_exec($ch);
+                    $headers = curl_getinfo($ch);
 
-        $simpleXml = simplexml_load_string($fileContents);
+                    $error_number = curl_errno($ch);
+                    $error_message = curl_error($ch);
+                    // netjes sluiten
+                    curl_close($ch);
+                    if ($error_number == 0) {
+                            if ( file_exists($file) ) {
+                                    unlink($file);
+                            }
+                            $handle = fopen($file, 'w');
+                            fwrite($handle, $results);
+                            fclose($handle);
+                    }
+            }
+            else {
+                $results = file_get_contents($url);
+            }
 
-        $json = json_encode($simpleXml);
-        $array = json_decode($json,TRUE);
+            return $this->parse($results);
+	}
 
-        return $array;
-    }
+	public function parse ($data) {
 
-    /**
-     * Setter for the API-key
-     *
-     * @param string $apikey
-     * @return void
-     */
-    public function setApikey($apikey) {
-        $this->_apikey = $apikey;
-    }
+            $fileContents = $data;
+            $fileContents = str_replace(array("\n", "\r", "\t"), '', $fileContents);
+            $fileContents = trim(str_replace('"', "'", $fileContents));
 
-    /**
-     * Getter for the API-key
-     *
-     * @return string
-     */
-    public function getApikey() {
-        return $this->_apikey;
-    }
+            $simpleXml = simplexml_load_string($fileContents);
+
+            $json = json_encode($simpleXml);
+            $array = json_decode($json,TRUE);
+
+            return $array;
+	}
+        
+	/**
+	 * Setter for the API-key
+	 *
+	 * @param string $apikey
+	 * @return void
+	 */
+	public function setApikey($apikey)
+	{
+            $this->_apikey = $apikey;
+	}
+
+	/**
+	 * Getter for the API-key
+	 *
+	 * @return string
+	 */
+	public function getApikey()
+	{
+            return $this->_apikey;
+	}
+	
+//	public function getDateToday()
+//	{
+//		return $this->_dateToday;
+//	}
+//	public function getDateTomorrow()
+//	{
+//		return $this->_dateTomorrow;
+//	}
 }
+?>

@@ -63,17 +63,29 @@ a { color: #1578C8;
     padding: 2px 15px;
     width: 100%;
 }*/
-
+.accordion-group {
+    margin-bottom: 2px;
+    border: 1px solid #e5e5e5;
+    border-radius: 4px;
+}
 .accordion-heading {
 	background-color: #292929;
 	border-top-left-radius: 3px;
 	border-top-right-radius: 3px;
 	overflow: hidden;
 	position: relative;
-
-	a { color: #999999; }
+        
+	a {
+            color: #999999;
+            display: block;
+            padding: 8px 15px;
+        }
 }
-.accordion-inner { background-color: #F7F7F9; }
+.accordion-inner {
+    background-color: #F7F7F9;
+    border-top: 1px solid #e5e5e5;
+    padding: 9px 15px;
+}
 
 	.starttime {
 		@media (min-width: 600px) {

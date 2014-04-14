@@ -1,0 +1,58 @@
+<div class="accordion-heading">
+    <a {{bind-attr data-imdbtitle="view.content.imdb_id"}} class="accordion-toggle" 
+        data-toggle="collapse" {{bind-attr data-parent="view.parentRef"}}
+        {{bind-attr href="view.internalRef"}}>
+        {{#if view.content.tomato.ratings.critics_rating }}
+            <i {{bind-attr class=":icon :tiny view.content.tomato.audienceIcon"}}></i>
+        {{/if}}
+        {{#if view.content.tomato.ratings.audience_rating }}
+            <i {{bind-attr class=":icon :tiny view.content.tomato.criticsIcon"}}></i>
+        {{/if}}
+        {{{view.content.titel}}} <small>({{view.content.jaar}})</small>
+        <span class="starttime">{{format-date view.content.starttijd "HH:mm"}}</span>
+    </a>
+
+    <img {{bind-attr src="view.content.zenderLogo"}} {{bind-attr alt="view.content.zender"}} {{bind-attr title="view.content.zender"}} class="zender logo" />
+    <span class="zender name">{{view.content.zender}}</span>
+
+</div>
+<div {{bind-attr id="view.internalId"}} {{bind-attr class=":accordion-body :collapse parentView.startsCollapsed:in"}}>
+    <div class="accordion-inner movie-details" {{bind-attr data-imdb="view.content.imdb_id"}}>
+        <span class="endtime">tot {{format-date view.content.eindtijd "HH:mm"}}</span>
+
+        {{#if view.content.tomato }}
+        <p>
+            <a {{bind-attr href="view.content.tomato.links.alternate"}}><strong>Rotten Tomatoes</strong></a>
+            {{#if view.content.tomato.ratings.critics_rating }}
+            <br />
+            <span class="rt-critics-rating"><em>Critici</em>
+                {{view.content.tomato.ratings.critics_score}}% 
+                {{view.content.tomato.ratings.critics_rating}}
+            </span>
+            {{/if}}
+
+            {{#if view.content.tomato.ratings.audience_rating }}
+            <br />
+            <span class="audience_rating"><em>Publiek</em>
+                {{view.content.tomato.ratings.audience_score}}% 
+                {{view.content.tomato.ratings.audience_rating}}
+            </span>
+            {{/if}}
+        </p>
+        {{/if}}
+
+        <p>
+            <a {{bind-attr href="view.content.imdbLink"}}><strong>IMDb</strong></a>
+            {{view.content.imdb_rating}} door {{view.content.imdb_votes}} stemmers
+        </p>
+        {{#if view.content.ft_votes }}
+        <p>
+            <a {{bind-attr href="view.content.ft_link"}}><strong>FilmTotaal</strong></a>
+            {{view.content.ft_rating}} door {{view.content.ft_votes}} stemmers
+        </p>
+        {{/if}}
+        <p class="movie-synopsis">
+            {{{view.content.synopsis}}}.. <a {{bind-attr href="view.content.ft_link"}}>lees meer</a>
+        </p>
+    </div>
+</div>

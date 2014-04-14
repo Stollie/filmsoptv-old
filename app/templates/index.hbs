@@ -3,21 +3,13 @@
       <h2>Vandaag <small id="date-today">{{moviesToday.date}}</small></h2>
 
       <div id="movies-today">
-          <div class="movie-list accordion" id="today">
-              {{#each moviesToday.movies}}
-                {{movie-item movie=this list=today}}
-              {{/each}}  
-          </div>
+          {{view 'accordion' content=moviesToday.movies }}
       </div>
     </div>
     <div class="col-lg-6">
       <h2>Morgen <small id="date-tomorrow">{{moviesTomorrow.date}}</small></h2>
       <div id="movies-tomorrow">
-          <div class="movie-list accordion" id="tomorrow">
-              {{#each moviesTomorrow.movies}}
-                {{movie-item movie=this list=tomorrow}}
-              {{/each}}  
-          </div>
+          {{view 'accordion' content=moviesTomorrow.movies }}
       </div>
     </div>
 </div>

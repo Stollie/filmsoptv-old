@@ -4,7 +4,7 @@ var Movie = DS.Model.extend({
     imdb_id: DS.attr('string'),
     imdbLink: function() {
        return 'http://www.imdb.com/title/tt' + this.get('imdb_id');
-     }.property('imdb_id'),
+    }.property('imdb_id'),
      
     zender: DS.attr('string'),
     zenderLogo: function() {

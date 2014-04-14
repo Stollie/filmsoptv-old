@@ -1,8 +1,7 @@
 <div class="accordion-group">
     <div class="accordion-heading">
         <a {{bind-attr data-imdbtitle="movie.imdb_id"}} class="accordion-toggle" 
-            data-toggle="collapse" {{bind-attr data-parent="list"}} 
-            {{bind-attr href="#collapse-list-id"}}>
+            data-toggle="collapse" {{bind-attr data-parent="view.parentRef"}}>
             {{#if movie.tomato.ratings.critics_score }}
                 <i {{bind-attr class=":icon :tiny movie.tomato.audienceIcon"}}></i>
             {{/if}}

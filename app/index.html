@@ -54,7 +54,7 @@
         <script src="/vendor/handlebars/handlebars.js"></script>
         <script src="/vendor/ember/ember.js"></script>
         <!-- @endif --><!-- @if dist=true -->
-        <script src="/vendor/handlebars/handlebars.runtime.js"></script>
+        <script src="/vendor/handlebars/handlebars.js"></script>
         <script src="/vendor/ember/ember.prod.js"></script>
         <!-- @endif -->
 
@@ -128,7 +128,6 @@
     </script>
     <!-- @endif -->
     <!-- @if dist=true -->
-    <!-- Piwik -->
     <script type="text/javascript">
     var pkBaseURL = (("https:" == document.location.protocol) ? "https://www.remcoraaijmakers.nl/statistics/" : "http://www.remcoraaijmakers.nl/statistics/");
     document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
@@ -139,7 +138,6 @@
     piwikTracker.enableLinkTracking();
     } catch( err ) {}
     </script><noscript><p><img src="http://www.remcoraaijmakers.nl/statistics/piwik.php?idsite=1" style="border:0" alt="" /></p></noscript>
-    <!-- End Piwik Tracking Code -->
     <!-- @endif -->
 </body>
 </html>

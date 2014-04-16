@@ -5,7 +5,7 @@
   "proxyURL": "http://remcoraaijmakers.nl/filmsoptv3",
   "proxyPath": "/api",
   "docURL": "http://localhost:8000/docs/index.html",
-  "version": "0.0.0",
+  "version": "3.0.0",
   "private": true,
   "directories": {
     "doc": "doc",
@@ -19,14 +19,14 @@
   },
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "git://github.com/Stollie/filmsoptv.git"
   },
-  "author": "",
+  "author": "Remco Raaijmakers",
   "license": "MIT",
   "devDependencies": {
     "express": "~3.4.8",
     "lockfile": "~0.4.2",
-    "bower": "~1.2.7",
+    "bower": "~1.3.2",
     "grunt": "~0.4.2",
     "grunt-cli": "~0.1.9",
     "load-grunt-config": "~0.7.0",

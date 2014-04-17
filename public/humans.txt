@@ -5,7 +5,7 @@
 
     Remco Raaijmakers -- Developer -- @stolliewood
 
-y
+
 # TECHNOLOGY COLOPHON
 
     HTML5, CSS3

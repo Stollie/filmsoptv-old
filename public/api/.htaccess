@@ -4,9 +4,9 @@ RewriteEngine On
 RewriteCond %{SCRIPT_FILENAME} !-d
 RewriteCond %{SCRIPT_FILENAME} !-f
  
-RewriteRule ^/filmsoptv3/api/lists/1$ ./filmsoptv3/api/index.php?list=today
-RewriteRule ^/filmsoptv3/api/lists/1$ ./filmsoptv3/api/index.php?list=today
-RewriteRule ^lists/1$ ./index.php?list=today
-RewriteRule ^lists/2$ ./index.php?list=tomorrow
+RewriteRule ^/filmsoptv/api/lists/1$ ./filmsoptv/api/index.php?list=today
+RewriteRule ^/filmsoptv/api/lists/1$ ./filmsoptv/api/index.php?list=today
+#RewriteRule ^lists/1$ ./index.php?list=today
+#RewriteRule ^lists/2$ ./index.php?list=tomorrow
 
 </IfModule>

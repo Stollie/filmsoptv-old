@@ -5,6 +5,6 @@
 //
 // window.ENV.public_key = '123456'
 
-window.ENV.rootURL = '/filmsoptv3/';
+window.ENV.rootURL = '/filmsoptv/';
 window.ENV.host = 'http://www.remcoraaijmakers.nl';
-window.ENV.namespace = 'filmsoptv3/api';
+window.ENV.namespace = 'filmsoptv/api';
